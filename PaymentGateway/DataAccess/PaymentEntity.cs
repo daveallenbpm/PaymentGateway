@@ -1,7 +1,9 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PaymentGateway.DataAccess
 {
+    [Table("Payments")]
     public class PaymentEntity
     {
         public int Id { get; set; }
