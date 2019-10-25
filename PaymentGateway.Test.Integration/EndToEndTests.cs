@@ -12,6 +12,7 @@ namespace PaymentGateway.Test.Integration
     public class EndToEndTests
     {
         [Fact]
+        [Trait("Category", "Integration")]
         public async void Submit_a_valid_payment_and_check_it_exists_in_the_database()
         {
             // Todo - needs url

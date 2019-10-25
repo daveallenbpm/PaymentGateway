@@ -1,9 +1,8 @@
-dotnet test
+dotnet test --filter Category!=Integration
 
 if ($lastexitcode -ne 0) {
 	echo 'TestsFailed! Aborting build.'
 }
 else {
 	dotnet build
-	# dotnet run --project .\PaymentGateway\PaymentGateway.csproj
 }
