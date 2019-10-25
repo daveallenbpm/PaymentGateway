@@ -2,6 +2,7 @@
 using PaymentGateway.DataAccess;
 using PaymentGateway.ExternalServices;
 using PaymentGateway.Models;
+using System;
 
 namespace PaymentGateway.Controllers
 {
@@ -29,16 +30,22 @@ namespace PaymentGateway.Controllers
                 return NotFound();
             }
 
-            var paymentDto = new PaymentGetDto(paymentEntity.CardNumber)
+            PaymentGetDto paymentDto = MapToPaymentGetDto(paymentEntity);
+
+            return new JsonResult(paymentDto);
+        }
+
+        [HttpGet("paymentid/{paymentId}")]
+        public IActionResult GetByPaymentId(Guid paymentId)
+        {
+            var paymentEntity = _payments.GetByPaymentId(paymentId);
+
+            if (paymentEntity == null)
             {
-                Id = paymentEntity.Id,
-                PaymentId = paymentEntity.PaymentId,
-                PaymentStatus = paymentEntity.PaymentStatus,
-                ExpiryDate = paymentEntity.ExpiryDate,
-                Amount = paymentEntity.Amount,
-                Currency = paymentEntity.Currency,
-                CVV = paymentEntity.CVV
-            };
+                return NotFound();
+            }
+
+            PaymentGetDto paymentDto = MapToPaymentGetDto(paymentEntity);
 
             return new JsonResult(paymentDto);
         }
@@ -62,6 +69,20 @@ namespace PaymentGateway.Controllers
             _payments.Add(paymentEntity);
 
             return new JsonResult(result);
+        }
+
+        private static PaymentGetDto MapToPaymentGetDto(PaymentEntity paymentEntity)
+        {
+            return new PaymentGetDto(paymentEntity.CardNumber)
+            {
+                Id = paymentEntity.Id,
+                PaymentId = paymentEntity.PaymentId,
+                PaymentStatus = paymentEntity.PaymentStatus,
+                ExpiryDate = paymentEntity.ExpiryDate,
+                Amount = paymentEntity.Amount,
+                Currency = paymentEntity.Currency,
+                CVV = paymentEntity.CVV
+            };
         }
     }
 }

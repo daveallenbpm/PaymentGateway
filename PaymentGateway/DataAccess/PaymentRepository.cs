@@ -24,5 +24,10 @@ namespace PaymentGateway.DataAccess
         {
             return _db.Payments.SingleOrDefault(p => p.Id == id);
         }
+
+        public PaymentEntity GetByPaymentId(System.Guid paymentId)
+        {
+            return _db.Payments.SingleOrDefault(p => p.PaymentId == paymentId);
+        }
     }
 }

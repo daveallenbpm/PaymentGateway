@@ -82,5 +82,29 @@ namespace PaymentGateway.Test.Unit
             Assert.Equal(bankResponse.PaymentId, bankResponseResult.PaymentId);
             Assert.Equal(PaymentStatus.Success.ToString(), bankResponseResult.Status);
         }
+
+        [Fact]
+        public void Get_should_return_not_found_if_the_payment_is_not_found()
+        {
+            var payments = new Mock<IPaymentRepository>();
+            payments.Setup(p => p.Get(It.IsAny<int>())).Returns((PaymentEntity)null);
+
+            var controller = new PaymentController(Mock.Of<IBank>(), payments.Object);
+
+            IActionResult result = controller.Get(1);
+            Assert.True(result is NotFoundResult);
+        }
+
+        [Fact]
+        public void GetByPaymentId_should_return_not_found_if_the_payment_is_not_found()
+        {
+            var payments = new Mock<IPaymentRepository>();
+            payments.Setup(p => p.GetByPaymentId(It.IsAny<Guid>())).Returns((PaymentEntity)null);
+
+            var controller = new PaymentController(Mock.Of<IBank>(), payments.Object);
+
+            IActionResult result = controller.GetByPaymentId(Guid.NewGuid());
+            Assert.True(result is NotFoundResult);
+        }
     }
 }

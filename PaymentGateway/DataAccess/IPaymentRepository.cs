@@ -4,5 +4,6 @@
     {
         void Add(PaymentEntity payment);
         PaymentEntity Get(int id);
+        PaymentEntity GetByPaymentId(System.Guid paymentId);
     }
 }
