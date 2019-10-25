@@ -28,14 +28,13 @@ namespace PaymentGateway
             services.AddDbContextPool<AppDbContext>(options => {
                 options.UseSqlite(connectionString);
             });
-            services.AddSingleton<IPaymentRepository, PaymentRepositoryMock>();
+            services.AddScoped<IPaymentRepository, PaymentRepository>();
             services.AddScoped<IBank, BankMock>();
 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Payment API", Version = "v1" });
             });
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
