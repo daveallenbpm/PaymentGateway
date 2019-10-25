@@ -67,5 +67,15 @@ namespace PaymentGateway.Test.Unit
             Assert.True(validationResults.Count > 0);
             Assert.Contains(nameof(payment.CVV), validationResults.First().ErrorMessage);
         }
+
+        [Fact]
+        public void PaymentDto_model_validation_should_return_valid_for_a_valid_model()
+        {
+            var payment = TestHelpers.GenerateValidPaymentDto();
+
+            var validationResults = TestHelpers.ValidateModel(payment);
+
+            Assert.True(validationResults.Count == 0);
+        }
     }
 }
