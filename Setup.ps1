@@ -11,6 +11,7 @@ if (!(Check-Installed("sqlite3"))) {
 	}
 
 	choco install sqlite
+	RefreshEnv.cmd
 }
 
 if (!([System.IO.File]::Exists('.\PaymentGateway\Database\Database.db'))) {
