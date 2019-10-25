@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentGateway.Test.Unit", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{C69B3D85-2EE6-4575-B893-D6C5A7A70DD6}"
 	ProjectSection(SolutionItems) = preProject
-		Build.ps1 = Build.ps1
+		Setup.ps1 = Setup.ps1
 	EndProjectSection
 EndProject
 Global
