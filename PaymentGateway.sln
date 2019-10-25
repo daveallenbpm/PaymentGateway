@@ -9,8 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentGateway.Test.Unit", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{C69B3D85-2EE6-4575-B893-D6C5A7A70DD6}"
 	ProjectSection(SolutionItems) = preProject
+		Build.ps1 = Build.ps1
 		Setup.ps1 = Setup.ps1
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentGateway.Test.Integration", "PaymentGateway.Test.Integration\PaymentGateway.Test.Integration.csproj", "{B620FE69-1932-41E7-B972-6EF438B36E58}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +29,10 @@ Global
 		{C95FBCBE-060A-461E-89CE-CFDFDF9977F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C95FBCBE-060A-461E-89CE-CFDFDF9977F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C95FBCBE-060A-461E-89CE-CFDFDF9977F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B620FE69-1932-41E7-B972-6EF438B36E58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B620FE69-1932-41E7-B972-6EF438B36E58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B620FE69-1932-41E7-B972-6EF438B36E58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B620FE69-1932-41E7-B972-6EF438B36E58}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
