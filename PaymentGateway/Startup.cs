@@ -7,6 +7,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using PaymentGateway.DataAccess;
 using PaymentGateway.ExternalServices;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 namespace PaymentGateway
 {
@@ -22,7 +25,9 @@ namespace PaymentGateway
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+                .AddMetrics();
 
             var connectionString = Configuration.GetConnectionString("AppDb");
             services.AddDbContextPool<AppDbContext>(options => {
@@ -30,6 +35,23 @@ namespace PaymentGateway
             });
             services.AddScoped<IPaymentRepository, PaymentRepository>();
             services.AddScoped<IBank, BankMock>();
+
+            // Hack to allow current version of App.Metrics to work with .Net Core 3.0
+            var iisServiceProcessNames = new List<string> { "w3wp", "iisexpress" };
+            if (iisServiceProcessNames.Contains(System.Diagnostics.Process.GetCurrentProcess().ProcessName))
+            {
+                services.Configure<IISServerOptions>(options =>
+                {
+                    options.AllowSynchronousIO = true;
+                });
+            }
+            else
+            {
+                services.Configure<KestrelServerOptions>(options =>
+                {
+                    options.AllowSynchronousIO = true;
+                });
+            }
 
             services.AddSwaggerGen(c =>
             {

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using App.Metrics.AspNetCore;
 
 namespace PaymentGateway
 {
@@ -20,6 +21,7 @@ namespace PaymentGateway
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.UseMetrics();
                     webBuilder.UseStartup<Startup>();
                 });
     }
