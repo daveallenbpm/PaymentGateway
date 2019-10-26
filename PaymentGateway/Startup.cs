@@ -10,6 +10,9 @@ using PaymentGateway.ExternalServices;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
+using System.Reflection;
+using System.IO;
+using System;
 
 namespace PaymentGateway
 {
@@ -55,7 +58,21 @@ namespace PaymentGateway
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Payment API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { 
+                    Title = "Payment API",
+                    Version = "v1",
+                    Description = "A simple payment gateway",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Dave Allen",
+                        Email = string.Empty,
+                        Url = new Uri("https://twitter.com/daveallenbpm"),
+                    }
+                });
+
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
         }
 

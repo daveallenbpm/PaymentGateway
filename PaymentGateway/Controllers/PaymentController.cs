@@ -20,7 +20,15 @@ namespace PaymentGateway.Controllers
             _payments = payments;
         }
 
+        /// <summary>
+        /// Returns the payment with the given id.
+        /// </summary>
+        /// <param name="id">The id of the payment.</param>
+        /// <response code="200">Returns the payment</response>
+        /// <response code="404">If the payment is not found</response>
         [HttpGet("{id}")]
+        [ProducesResponseType(200, Type = typeof(PaymentGetDto))]
+        [ProducesResponseType(404, Type = typeof(NotFoundResult))]
         public IActionResult Get(int id)
         {
             var paymentEntity = _payments.Get(id);
@@ -35,7 +43,20 @@ namespace PaymentGateway.Controllers
             return new JsonResult(paymentDto);
         }
 
+        /// <summary>
+        /// Returns the payment with the given paymentId.
+        /// </summary>
+        /// <param name="paymentId">The payment id of the payment (given by the bank).</param>
+        /// <remarks>
+        ///     paymentId is a Guid, e.g.: CDF86033-57D6-4C88-BF60-061FEA6888F9
+        /// </remarks>
+        /// <response code="200">Returns the payment</response>
+        /// <response code="404">If the payment is not found</response>
         [HttpGet("paymentid/{paymentId}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(200, Type = typeof(PaymentGetDto))]
+        [ProducesResponseType(404, Type = typeof(NotFoundResult))]
         public IActionResult GetByPaymentId(Guid paymentId)
         {
             var paymentEntity = _payments.GetByPaymentId(paymentId);
@@ -50,7 +71,15 @@ namespace PaymentGateway.Controllers
             return new JsonResult(paymentDto);
         }
 
+        /// <summary>
+        /// Processes a payment with the supplied data.
+        /// </summary>
+        /// <param name="payment">The payment data.</param>
+        /// <response code="200">When the payment is processed successfully.</response>
+        /// <response code="400">When payment data is invalid.</response>
         [HttpPost]
+        [ProducesResponseType(200, Type = typeof(BankResponse))]
+        [ProducesResponseType(400, Type = typeof(ValidationProblemDetails))]
         public IActionResult Process([FromBody] PaymentPostDto payment)
         {
             var result = _bank.RequestPayment(payment);
