@@ -17,6 +17,7 @@ namespace PaymentGateway.Models
 
         [Required]
         [StringLength(3, MinimumLength = 3)]
+        [Currency]
         public string Currency { get; set; }
 
         [Required]

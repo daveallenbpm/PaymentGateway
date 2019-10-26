@@ -40,14 +40,16 @@ namespace PaymentGateway.Test.Unit
         [InlineData("")]
         [InlineData((string)null)]
         [InlineData("GB")]
+        [InlineData("XYZ")]
+        [InlineData("ABC")]
         public void PaymentDto_model_validation_should_pick_up_invalid_currency_values(string currency)
         {
             var payment = TestHelpers.GenerateValidPaymentDto();
             payment.Currency = currency;
 
             var validationResults = TestHelpers.ValidateModel(payment);
-            Assert.Equal(1, validationResults.Count);
-            Assert.Contains(nameof(payment.Currency), validationResults.Single().ErrorMessage);
+            Assert.True(validationResults.Count > 0);
+            Assert.Contains(nameof(payment.Currency), validationResults.First().ErrorMessage);
         }
 
         [Theory]

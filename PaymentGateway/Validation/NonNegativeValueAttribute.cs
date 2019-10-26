@@ -20,7 +20,7 @@ namespace PaymentGateway.Validation
                 }
             }
 
-            return new ValidationResult($"This data type is not compatable with this attribute.");
+            return new ValidationResult($"This data type is not compatible with this attribute.");
         }
     }
 }
