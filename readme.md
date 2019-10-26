@@ -33,5 +33,6 @@ More info on these can be found from the Payment Gateway's swagger page (can be 
 ## Areas that could be improved
 
 - The currencies could be inserted into a table in the database, rather than being used as an enum.
-- Much more in the way of integration testing could be added - e.g. could test repositories using an in-memory database.
+- More integration testing could be added - e.g. could test repositories using an in-memory database.
 - Further exploration of what App Metrics can add into the project.
+- Not to mention app logging, containerization, authentication etc!
