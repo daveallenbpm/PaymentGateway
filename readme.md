@@ -41,6 +41,7 @@ More info on these can be found from the Payment Gateway's swagger page (can be 
 - The currencies could be inserted into a table in the database, rather than being used as an enum.
 - More integration testing could be added - e.g. could test repositories using an in-memory database.
 - Further exploration of what App Metrics can add into the project.
+- Could use async / await on the POST /api/Payment, would be useful to await the call to the bank (if it were making an external request).
 - Build script doesn't do much!
 - Would be interested to try out Fake for scripts.
 - Not to mention app logging, containerization, authentication etc!
