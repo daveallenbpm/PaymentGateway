@@ -1,7 +1,9 @@
-﻿using PaymentGateway.Enums;
+﻿using Microsoft.Extensions.Configuration;
+using PaymentGateway.Enums;
 using PaymentGateway.ExternalServices;
 using PaymentGateway.Models;
 using System;
+using System.IO;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -11,14 +13,22 @@ namespace PaymentGateway.Test.Integration
 {
     public class EndToEndTests
     {
+        private readonly IConfigurationRoot _config;
+
+        public EndToEndTests()
+        {
+            // Read configuration from the appsettings.json file
+            var configurationBuilder = new ConfigurationBuilder();
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json");
+            configurationBuilder.AddJsonFile(path, false);
+            _config = configurationBuilder.Build();
+        }
+
         [Fact]
         [Trait("Category", "Integration")]
         public async void Submit_a_valid_payment_and_check_it_exists_in_the_database()
         {
-            // Todo - needs url
-            var client = new HttpClient();
-            client.BaseAddress = new Uri("https://localhost:44355");
-
+            using var client = new HttpClient { BaseAddress = new Uri(_config["HostUrl"]) };
             var request = new PaymentPostDto
             {
                 CardNumber = "5555555555554444",
