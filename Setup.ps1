@@ -15,6 +15,10 @@ if (!(Check-Installed("sqlite3"))) {
 }
 
 if (!([System.IO.File]::Exists('.\PaymentGateway\Database\Database.db'))) {
+	if(!(Test-Path .\PaymentGateway\Database\ -PathType Container)) {
+		mkdir .\PaymentGateway\Database\
+	}
+	
 	echo "Creating database"
 	sqlite3 .\PaymentGateway\Database\Database.db "VACUUM;"
 }
