@@ -19,6 +19,11 @@ The following endpoints are provided:
 
 More info on these can be found from the Payment Gateway's swagger page (can be found at /swaggerui/index.html).
 
+###Metrics
+
+- /metrics - metrics for the payment gateway.
+- /env - hosting environment data.
+
 ## Testing
 
 - Unit tests can be found in PaymentGateway.Test.Unit
@@ -29,6 +34,7 @@ More info on these can be found from the Payment Gateway's swagger page (can be 
 - Bank is mocked out. In here, I've assumed an expired card number will return a Rejected status, success otherwise.
 - Assumed the card number field contains 16 characters.
 - Assumed negative amounts aren't allowed.
+- Worked on a Windows machine developing this. Setup instructions untested for Mac / Linux.
 
 ## Areas that could be improved
 
