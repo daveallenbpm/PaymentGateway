@@ -19,7 +19,7 @@ The following endpoints are provided:
 
 More info on these can be found from the Payment Gateway's swagger page (can be found at /swaggerui/index.html).
 
-###Metrics
+### Metrics
 
 - /metrics - metrics for the payment gateway.
 - /env - hosting environment data.
