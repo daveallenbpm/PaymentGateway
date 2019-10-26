@@ -46,10 +46,7 @@ namespace PaymentGateway.Controllers
         /// <summary>
         /// Returns the payment with the given paymentId.
         /// </summary>
-        /// <param name="paymentId">The payment id of the payment (given by the bank).</param>
-        /// <remarks>
-        ///     paymentId is a Guid, e.g.: CDF86033-57D6-4C88-BF60-061FEA6888F9
-        /// </remarks>
+        /// <param name="paymentId">The payment id of the payment (guid given by the bank, e.g. CDF86033-57D6-4C88-BF60-061FEA6888F9).</param>
         /// <response code="200">Returns the payment</response>
         /// <response code="404">If the payment is not found</response>
         [HttpGet("paymentid/{paymentId}")]
