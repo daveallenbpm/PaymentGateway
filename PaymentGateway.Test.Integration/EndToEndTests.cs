@@ -29,13 +29,16 @@ namespace PaymentGateway.Test.Integration
         public async void Submit_a_valid_payment_and_check_it_exists_in_the_database()
         {
             using var client = new HttpClient { BaseAddress = new Uri(_config["HostUrl"]) };
+
+            var random = new Random();
+            var currencies = System.Enum.GetNames(typeof(Currency));
             var request = new PaymentPostDto
             {
                 CardNumber = "5555555555554444",
-                ExpiryDate = DateTime.Now.AddDays(10),
+                ExpiryDate = DateTime.Now.AddDays(random.Next(5, 200)),
                 Amount = 10,
-                Currency = "GBP",
-                CVV = "123"
+                Currency = currencies[random.Next(0, currencies.Length)],
+                CVV = $"{random.Next(100, 999)}"
             };
 
             var jsonOptions = new JsonSerializerOptions
@@ -49,7 +52,6 @@ namespace PaymentGateway.Test.Integration
             var responseString = await postResponse.Content.ReadAsStringAsync();
             var responseData = JsonSerializer.Deserialize<BankResponse>(responseString, jsonOptions);
 
-
             var getResponse = await client.GetAsync($"/api/payment/paymentId/{responseData.PaymentId}");
             var getResponseString = await getResponse.Content.ReadAsStringAsync();
             var getResponseData = JsonSerializer.Deserialize<PaymentGateway.Test.Integration.PaymentGetDto>(getResponseString, jsonOptions);
@@ -58,9 +60,9 @@ namespace PaymentGateway.Test.Integration
             Assert.Equal(PaymentStatus.Success.ToString(), getResponseData.PaymentStatus);
             Assert.Equal("************4444", getResponseData.CardNumber);
             Assert.Equal(request.ExpiryDate.Date, getResponseData.ExpiryDate);
-            Assert.Equal(10, getResponseData.Amount);
-            Assert.Equal("GBP", getResponseData.Currency);
-            Assert.Equal("123", getResponseData.CVV);
+            Assert.Equal(request.Amount, getResponseData.Amount);
+            Assert.Equal(request.Currency, getResponseData.Currency);
+            Assert.Equal(request.CVV, getResponseData.CVV);
         }
     }
 }
