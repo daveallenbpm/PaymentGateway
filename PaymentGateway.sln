@@ -10,10 +10,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{C69B3D85-2EE6-4575-B893-D6C5A7A70DD6}"
 	ProjectSection(SolutionItems) = preProject
 		Build.ps1 = Build.ps1
+		RunIntegrationTests.ps1 = RunIntegrationTests.ps1
 		Setup.ps1 = Setup.ps1
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentGateway.Test.Integration", "PaymentGateway.Test.Integration\PaymentGateway.Test.Integration.csproj", "{B620FE69-1932-41E7-B972-6EF438B36E58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentGateway.Test.Integration", "PaymentGateway.Test.Integration\PaymentGateway.Test.Integration.csproj", "{B620FE69-1932-41E7-B972-6EF438B36E58}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
