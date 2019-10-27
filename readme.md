@@ -4,7 +4,7 @@ A simple payment gateway. Requires .netcore version 3.0.
 
 ## Setup
 
-If you're running on Windows, run the powershell script, Setup.ps1. This will:
+Run the powershell script, Setup.ps1. This will:
 - Install Sqlite3
 - Create the sqlite database
 - Install Entity Framework (dotnet-ef)
@@ -34,7 +34,7 @@ More info on these can be found from the Payment Gateway's swagger page (can be 
 - Bank is mocked out. In here, I've assumed an expired card number will return a Rejected status, success otherwise.
 - Assumed the card number field contains 16 characters.
 - Assumed negative amounts aren't allowed.
-- Worked on a Windows machine developing this. Setup instructions untested for Mac / Linux.
+- Worked on a Windows machine developing this. Setup instructions untested for Mac / Linux. Also could make a shell script, getting rid of the need for powershell on Mac / Linux.
 
 ## Areas that could be improved
 
@@ -42,6 +42,5 @@ More info on these can be found from the Payment Gateway's swagger page (can be 
 - More integration testing could be added - e.g. could test repositories using an in-memory database.
 - Further exploration of what App Metrics can add into the project.
 - Could use async / await on the POST /api/Payment, would be useful to await the call to the bank (if it were making an external request).
-- Build script doesn't do much!
-- Would be interested to try out Fake for scripts.
+- Build script doesn't do much at the moment!
 - Not to mention app logging, containerization, authentication etc!
