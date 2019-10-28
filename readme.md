@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/daveallenbpm/PaymentGateway.svg)](https://travis-ci.org/daveallenbpm/PaymentGateway)
+
 # Payment Gateway
 
 A simple payment gateway. Requires .netcore version 3.0.
